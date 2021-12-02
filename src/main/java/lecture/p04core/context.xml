@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean class ="lecture.p04core.MyServlet">
+	<property name="myDao" ref ="myDao"></property>
+</bean>
+
+<!-- id를 주면 다른 bean에서 그 이름으로 쓸 수 있다. -->
+<bean id = "myDao" class ="lecture.p04core.MyDao"></bean>
+
+<!-- 시키는 일도 설명서에서 시킬 수 있다. -->
+<!-- dependency injection -->
+
+
+</beans>
