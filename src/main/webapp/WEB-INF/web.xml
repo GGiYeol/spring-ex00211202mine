@@ -30,4 +30,14 @@
     <servlet-name>MyServlet</servlet-name>
     <url-pattern>/MyServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Myservlet</display-name>
+    <servlet-name>Myservlet</servlet-name>
+    <servlet-class>lecture.p06core.Myservlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Myservlet</servlet-name>
+    <url-pattern>/Myservlet</url-pattern>
+  </servlet-mapping>
 </web-app>
