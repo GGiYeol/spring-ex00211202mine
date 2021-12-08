@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 사용할 쿼리가 어느 인터페이스에 관련되어 있는지 설정 -->
+
+<mapper namespace="org.zerock.mapper.p05mapper.Mapper01"><!-- namespace : 인터페이스명(풀네임) -->
+	<select id="getSupplierOne"
+	 resultType="org.zerock.controller.p05controller.bean.Bean16">
+	
+	SELECT
+			SupplierName,
+			ContactName
+	FROM
+			Suppliers
+	WHERE
+			SupplierID=3		
+	
+	</select>
+	
+	<select id="getEmployeeNameOne"
+	resultType = "org.zerock.controller.p05controller.bean.Bean09">
+	
+	SELECT LastName, FirstName FROM Employees WHERE EmployeeId = 3
+
+	</select>
+	
+	<select id="getEmployeeNameList"
+	resultType ="org.zerock.controller.p05controller.bean.Bean09">
+	<!-- list안의 타입만 적어주면 된다 -->
+	SELECT LastName, FirstName FROM Employees
+	
+	</select>
+	
+	<select  id="getSupplierList"
+	resultType ="org.zerock.controller.p05controller.bean.Bean16">
+	SELECT SupplierName, ContactName FROM Suppliers
+	
+	</select>
+	
+	<!-- 하나의 string 을 얻어오는 내용 -->
+	<select id="getEmployeeLastNameOne"
+	resultType = "string">
+	SELECT LastName FROM Employees WHERE EmployeeID = 1
+	</select>
+	
+	<select id="getEmployeeFirstNameOne"
+	resultType = "string">
+	SELECT FirstName 
+	FROM Employees 
+	WHERE EmployeeID = 3
+	</select>
+	
+	<select id="getEmployeeLastNameList"
+	resultType = "string">
+	SELECT LastName
+	FROM Employees
+	</select>
+	
+</mapper>

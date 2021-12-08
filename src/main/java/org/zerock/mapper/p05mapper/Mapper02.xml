@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="org.zerock.mapper.p05mapper.Mapper02">
+	<select  id="getLastNameById"
+	resultType="string">
+	SELECT LastName
+	FROM Employees
+	WHERE EmployeeID = #{id}
+	</select>  
+	
+	<select id="getCustomerNameById"
+	resultType="string">
+	SELECT CustomerName
+	FROM Customers
+	WHERE CustomerID = #{id}
+	</select>
+	
+	<select id="getProductNamesByCategory"
+	resultType="string">
+	SELECT p.ProductName
+	FROM Products p
+	JOIN Categories c ON p.CategoryID = c.CategoryID
+	WHERE CategoryName= #{category}
+	</select>
+	
+	<select id="getProductNamesByCategoryAndPrice"
+	resultType="string">
+	<!-- 부등호 기호와 쿼리 기호가 똑같아서 문제가 생길 때에는???CDATA사용 -->
+	<![CDATA[
+	SELECT p.ProductName
+	FROM Products p
+	JOIN Categories c ON p.CategoryID = c.CategoryID
+	WHERE c.CategoryName= #{category} AND p.price < #{price};
+	]]>
+	</select>
+	
+	<select id="getSuppierNamesByCityAndCountry"
+	resultType="string">
+	<![CDATA[
+	SELECT SupplierName
+	FROM Suppliers
+	WHERE city= #{city} AND country= #{country};
+	]]>
+	</select>
+	
+  </mapper>
