@@ -62,5 +62,17 @@
 		<servlet-name>appServlet</servlet-name>
 	</filter-mapping>
 	
+	<filter>
+    <display-name>CheckLogInFilter</display-name>
+    <filter-name>CheckLogInFilter</filter-name>
+    <filter-class>org.zerock.filter.CheckLogInFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>CheckLogInFilter</filter-name>
+    <url-pattern>/member/list</url-pattern>
+    <url-pattern>/member/remove</url-pattern>
+    <url-pattern>/member/info</url-pattern>
+  </filter-mapping>
+	
 	  	
 </web-app>
