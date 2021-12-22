@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.project1.MemberVO;
+import org.zerock.domain.project1.PageInfoVO;
 import org.zerock.service.project1.MemberService;
 
 import lombok.Setter;
@@ -23,6 +26,33 @@ public class MemberController {
 
 	@Setter(onMethod_ = @Autowired)
 	private MemberService service;
+	
+	@RequestMapping("/nickNameCheck")
+	@ResponseBody
+	public String nickNameCheck(String nickName) {
+		boolean has = service.hasNickName(nickName);
+		
+		if (has) {
+			return "unable";
+		} else {
+			return "able";
+		}
+	}
+	
+	
+	@RequestMapping("/idcheck") 
+	@ResponseBody
+	public String idcheck(String id) {
+		
+		boolean has = service.hasId(id);
+		
+		if (has) {
+			return "unable";
+		} else {
+			return "able";
+		}
+	}
+	
 
 	@GetMapping("/signup")
 	public void signup() {
@@ -58,7 +88,7 @@ public class MemberController {
 	public String login(String id, String password, HttpSession session) {
 		// service 사용해서 아이디로 멤버vo 얻고
 		MemberVO vo = service.read(id);
-
+		
 		if (vo == null) {
 			return null;
 		}
@@ -153,7 +183,9 @@ public class MemberController {
 	}
 	
 	@GetMapping("/list")
-	public String list(Model model, HttpSession session) {
+	public String list(@RequestParam(defaultValue = "1")Integer page, Model model) {
+		Integer numberPerPage = 10;
+		
 		/* filter로 처리함
 		// 로그인 된 상태가 아니면 로그인화면으로 redirect
 		MemberVO vo = (MemberVO) session.getAttribute("loggedInMember");
@@ -164,9 +196,12 @@ public class MemberController {
 		}
 		*/
 		
-		List<MemberVO> list = service.getList();
+		List<MemberVO> list = service.getList(page, numberPerPage);
+		PageInfoVO pageInfo = service.getPageInfo(page, numberPerPage);
 		
 		model.addAttribute("memberList", list);
+		model.addAttribute("pageInfo", pageInfo);
+		
 		return null;
 	}
 }
